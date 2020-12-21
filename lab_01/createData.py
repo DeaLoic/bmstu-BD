@@ -10,7 +10,7 @@ man_names = re.findall("[А-Я][^А-Я]*", man_names)
 woman_names = re.findall("[А-Я][^А-Я]*", woman_names)
 
 def createPeople(minAge, maxAge):
-    id = random.randint(0, 9999999)
+    id = random.randint(0, 100000)
     if random.randint(0, 100) % 2 == 0:
         name = random.choice(man_names)
         surname = random.choice(man_names) + "ович"
@@ -67,7 +67,7 @@ ids = set()
 logins = set()
 
 print("\n\nSTUDENT\n\n")
-for i in range(0, 1000):
+for i in range(0, 10000):
     people = createPeople(15, 30)
     if people[0] not in ids and people[1] not in logins:
         ids.add(people[0])
