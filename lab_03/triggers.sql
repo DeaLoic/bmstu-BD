@@ -5,7 +5,7 @@
 -- after
 -- при смене группы добавляет запись в draft
 drop table if exists transfers;
-create table if not exists transfers
+create temp table if not exists transfers
 (
 	id serial not null,
 	studentId int,
@@ -32,9 +32,11 @@ after update on students
 for each row
 execute function groupChange();
 
+select *
+from studentgroups;
 update students 
-set idstudentgroup = 1
-where IdStudent = 1;
+set idstudentgroup = 6685633
+where IdStudent = 65224;
 select * from transfers;
 
 -- instead of
@@ -74,3 +76,27 @@ where IdProfessor = 39896;
 select *
 from professors_view
 where IdProfessor = 39896;
+
+create or replace procedure alertq()
+language plpgsql
+as
+$$
+begin
+	raise notice 'ols dont delete O:(';
+end
+$$;
+
+CREATE OR REPLACE FUNCTION abort_delete()
+  RETURNS event_trigger
+ LANGUAGE plpgsql
+  AS $$
+BEGIN
+  RAISE EXCEPTION 'pls dont delete this, b-b-baka... :(';
+END;
+$$;
+
+DROP EVENT TRIGGER IF EXISTS abort_delete;
+CREATE EVENT TRIGGER abort_delete ON ddl_command_start 
+	when tag in ('DROP TABLE', 'DROP SCHEMA')
+   EXECUTE PROCEDURE abort_delete();
+ DROP TABLE ADMINISTRATION;

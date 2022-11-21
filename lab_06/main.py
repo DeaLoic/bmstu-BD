@@ -84,7 +84,7 @@ def f7():
 def f8():
     request = 'select version()'
     cursor.execute(request)
-    print(cursor.fetchall()[0][0])
+    print(cursor.fetchone()[0])
 
 # 9. Создать таблицу в базеданных, соответствующую тематике БД
 def f9():
@@ -123,28 +123,31 @@ print(menu)
 choice = 1
 
 while choice != 0:
-    choice = int(input('Выбор: '))
-    if choice == 1:
-        f1()
-    elif choice == 2:
-        f2()
-    elif choice == 3:
-        f3()
-    elif choice == 4:
-        f4()
-    elif choice == 5:
-        f5()
-    elif choice == 6:
-        f6()
-    elif choice == 7:
-        f7()
-    elif choice == 8:
-        f8()
-    elif choice == 9:
-        f9()
-    elif choice == 10:
-        f10()
-
+    try:
+        choice = int(input('Выбор: '))
+        if choice == 1:
+            f1()
+        elif choice == 2:
+            f2()
+        elif choice == 3:
+            f3()
+        elif choice == 4:
+            f4()
+        elif choice == 5:
+            f5()
+        elif choice == 6:
+            f6()
+        elif choice == 7:
+            f7()
+        elif choice == 8:
+            f8()
+        elif choice == 9:
+            f9()
+        elif choice == 10:
+            f10()
+    except:
+        choice = 0
+        print("Error, but everything will be fine :/")
 
 cursor.close()
 conn.close()

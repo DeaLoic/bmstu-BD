@@ -31,11 +31,13 @@ select idstudentgroup, count(*)
 from students
 group by idstudentgroup
 having count(*) > 1;
+
 */
-call AddStudentsRepos(7860965, 7968052);
+
+call AddStudentsRepos(24951, 6013934);
 
 select * 
-from StudentsRepositories_copy where IdRepository = 7860965;
+from StudentsRepositories_copy where IdRepository = 24951;
 
 -- рекурсивную хранимую процедуру или хранимую процедуру с рекурсивным ОТВ
 -- обновляет возраст у студентов в промежутке id
@@ -122,5 +124,8 @@ begin
 	raise notice 'Count functions and procedures: %', funcsCount;
 end
 $$;
-
+select *
+from information_schema.routines
+WHERE routine_type
+      is null;
 call getFuncCount();
